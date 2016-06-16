@@ -9,7 +9,7 @@
 #ifndef EyeX_EyeP_hpp
 #define EyeX_EyeP_hpp
 
-#include "EyeX/EyeX.hpp"
+#include "EyeX.hpp"
 
 typedef void(*FunG)(float f_x, float f_y, float& g_x, float& g_y, void* param);
 
@@ -20,14 +20,14 @@ void EyeP_kw(
 	;
 void EyeP_kwmap(
 	FunG funG, void* param,
-	int l_x, int l_y, float l_x_0, float l_x_1, float l_y_0, float l_y_1,
-	int m_x, int m_y, float m_x_0, float m_x_1, float m_y_0, float m_y_1,
+	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
+	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
 	int32_t map_k[], int16_t map_w[][4])
 	;
 void EyeP_kwmap(
 	FunG funG, void* param,
-	int l_x, int l_y, float l_x_0, float l_x_1, float l_y_0, float l_y_1,
-	int m_x, int m_y, float m_x_0, float m_x_1, float m_y_0, float m_y_1,
+	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
+	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
 	int32_t map_k[], int16_t map_w[][4],
 	int32_t map_n[], int16_t map_z[][4])
 	;

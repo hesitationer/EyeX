@@ -9,6 +9,21 @@
 #define _EyeX_EyeP_hpp
 
 #include "EyeP.hpp"
-#include "EyeX/_EyeX.hpp"
+#include <math.h>
+#include <float.h>
+
+const int _SR = 12;
+
+inline
+int16_t _s(float f)
+{
+	return (int16_t)(f * (1 << _SR) + 0.5F);
+}
+
+inline
+uint8_t _r(int a)
+{
+	return (uint8_t)(a >> _SR);
+}
 
 #endif

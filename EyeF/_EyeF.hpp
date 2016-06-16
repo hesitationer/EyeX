@@ -5,190 +5,105 @@
 //  Copyright (c) 2014 ___ZHONGSIFEN___. All rights reserved.
 //
 
-#ifndef _EyeX_EyeP_hpp
-#define _EyeX_EyeP_hpp
+#ifndef _EyeX_EyeF_hpp
+#define _EyeX_EyeF_hpp
 
-#include "EyeX/_EyeX.hpp"
+#include "EyeF.hpp"
+#include "_EyeX.hpp"
 #include <math.h>
 #include <float.h>
 
+typedef float (*Fun1)(float);
+
 inline
-float _aa(float a)
+float fun1_aa(float a)
 {
 	return a;
 }
 
 inline
-float _af(float a)
+float fun1_af(float a)
 {
-	return tanf(a / 2.0F)*2.0F;
+	return tanf(a / 2) * 2;
 }
 
 inline
-float _fa(float f)
+float fun1_fa(float f)
 {
-	return atanf(f/2.0F)*2.0F;
+	return atanf(f / 2) * 2;
 }
 
 inline
-float _ah(float a)
+float fun1_ag(float a)
 {
 	return tanf(a);
 }
 
 inline
-float _ha(float h)
+float fun1_ga(float g)
 {
-	return atanf(h);
+	return atanf(g);
 }
 
 inline
-float _fh(float f)
+float fun1_gf(float g)
 {
-	return f / (1 - f*f / 4);
+	return (abs(g) < FLT_EPSILON) ? 0 : (-1 + sqrt(1 + g*g)) * 2 / g;
 }
 
 inline
-float _hf(float h)
+float fun1_fg(float f)
 {
-	return (-1 + sqrt(1 + h*h)) * 2 / h;
+	return (abs(f) > (2 - FLT_EPSILON)) ? FLT_MAX : f / (1 - f*f / 4);
 }
 
 inline
-void fung_af(
-	float f_x, float f_y,
-	float& g_x, float& g_y,
-	void* param)
+void _r(float f_x, float f_y, float& g_x, float& g_y, Fun1 fun1)
 {
-	float rr = (f_x*f_x + f_y*f_y);
-	if (rr < FLT_EPSILON) { g_x = 0; g_y = 0; return; }
-	float r = sqrtf(rr);
-	float t = _af(r) / r;
+	float r = sqrt(f_x*f_x + f_y*f_y);
+	if (r < FLT_EPSILON) { g_x = 0; g_y = 0; return; }
+	float t = fun1(r) / r;
 	g_x = f_x*t;
 	g_y = f_y*t;
 }
 
+//EyeP.hpp
+//typedef void(*FunG)(float f_x, float f_y, float& g_x, float& g_y, void* param);
+
 inline
-void fung_ha(
-	float f_x, float f_y,
-	float& g_x, float& g_y,
-	void* param)
+void fung_aa(float f_x, float f_y, float& g_x, float& g_y, void*)
 {
-	float rr = (f_x*f_x + f_y*f_y);
-	if (rr < FLT_EPSILON) { g_x = 0; g_y = 0; return; }
-	float r = sqrtf(rr);
-	float t = _ha(r) / r;
-	g_x = f_x*t;
-	g_y = f_y*t;
+	_r(f_x, f_y, g_x, g_y, fun1_aa);
 }
 
 inline
-void fung_pa(
-	float f_x, float f_y,
-	float& g_x, float& g_y,
-	void* param)
+void fung_gf(float f_x, float f_y, float& g_x, float& g_y, void*)
 {
-	float a = *((float *)param);
-	float rr = (f_x*f_x + f_y*f_y);
-	if (rr < FLT_EPSILON) { g_x = 0; g_y = 0; return; }
-	float r = sqrtf(rr);
-	float t = _ha(r) / r;
-	g_x = f_x*t + a;
-	g_y = f_y*t;
+	_r(f_x, f_y, g_x, g_y, fun1_gf);
 }
 
 inline
-void fung_fh(
-	float f_x, float f_y,
-	float& h_x, float& h_y,
-	void* param)
+void fung_af(float f_x, float f_y, float& g_x, float& g_y, void*)
 {
-	float rr = (f_x*f_x + f_y*f_y);
-	if (rr < FLT_EPSILON) { h_x = 0; h_y = 0; return; }
-	float t = 1 / (1 - rr / 4);
-	h_x = f_x*t;
-	h_y = f_y*t;
+	_r(f_x, f_y, g_x, g_y, fun1_af);
 }
 
 inline
-void fung_hf(
-	float h_x, float h_y,
-	float& f_x, float& f_y,
-	void* param)
+void fung_ga(float f_x, float f_y, float& g_x, float& g_y, void*)
 {
-	//f_x = _hf(h_x);
-	//f_y = _hf(h_y);
-	float rr = (h_x*h_x + h_y*h_y);
-	if (rr < FLT_EPSILON) { f_x = 0; f_y = 0; return; }
-	float r = sqrt(rr);
-	float t = _hf(r)/r;
-	//float t = (-1 + sqrt(1 + rr)) * 2 / rr;
-	f_x = h_x*t;
-	f_y = h_y*t;
+	_r(f_x, f_y, g_x, g_y, fun1_ga);
 }
 
 inline
-void _hp(
-	float h_0, float h_1, float p_0, float p_1,
-	float& b,  float& c)
+void fung_ha(float f_x, float f_y, float& g_x, float& g_y, void* param)
 {
-	float w = (h_1*p_1 - h_0*p_0);
-	if (fabs(w) < FLT_EPSILON) { b = 0; c = 0; return; }
+	float* w = (float*)param;
+	float w_x = w[0];
+	float w_y = w[1];
 
-	c = ((h_1 - h_0) - (p_1 - p_0))/w;
-	b = (c*h_0 + 1)*p_0 - h_0;
-}
-
-inline
-void _ph(
-	float p_x, float p_y, float b, float c,
-	float& h_x, float& h_y)
-{
-	float w = 1.0F/(c*p_x + 1);
-	h_x = (p_x + b)*w;
-	h_y = p_y*w;
+	_r(f_x, f_y, g_x, g_y, fun1_ga);
+	g_x += w_x;
+	g_y += w_y;
 }
 
-inline
-void fung_pf(
-	float p_x, float p_y,
-	float& f_x, float& f_y,
-	void* param)
-{
-	float* bc = (float*)param;
-	float h_x, h_y;
-	_ph(p_x, p_y, bc[0], bc[1], h_x, h_y);
-	float rr = (h_x*h_x + h_y*h_y);
-	if (rr < FLT_EPSILON) { f_x = 0; f_y = 0; return; }
-	float t = (-1 + sqrt(1 + rr)) * 2 / rr;
-	f_x = h_x*t;
-	f_y = h_y*t;
-}
-
-inline
-void fung_zh(
-	float z_a, float z_y,
-	float& h_x, float& h_y,
-	void* param)
-{
-	h_x = tanf(z_a);
-	h_y = z_y * sqrt(h_x*h_x + 1);
-}
-inline
-void fung_hz(
-	float h_x, float h_y,
-	float& z_a, float& z_y,
-	void* param)
-{
-	z_a = atanf(h_x);
-	z_y = h_y / sqrt(h_x*h_x + 1);
-}
-inline
-void fung_zf(
-	float z_a, float z_y,
-	float& f_x, float& f_y,
-	void* param)
-{
-
-}
 #endif

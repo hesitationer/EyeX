@@ -26,22 +26,22 @@ void EyeP_kw(
 
 void EyeP_kwmap(
 	FunG fung, void* param,
-	int l_x, int l_y, float l_x_0, float l_x_1, float l_y_0, float l_y_1,
-	int m_x, int m_y, float m_x_0, float m_x_1, float m_y_0, float m_y_1,
+	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
+	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
 	int32_t map_k[], int16_t map_w[][4])
 {
-	float r_x = (float)(l_x_1 - l_x_0) / l_x;
-	float r_y = (float)(l_y_1 - l_y_0) / l_y;
-	float s_x = (float)(m_x_1 - m_x_0) / m_x;
-	float s_y = (float)(m_y_1 - m_y_0) / m_y;
+	float r_x = (float)(l_x_p - l_x_n) / l_x;
+	float r_y = (float)(l_y_p - l_y_n) / l_y;
+	float s_x = (float)(m_x_p - m_x_n) / m_x;
+	float s_y = (float)(m_y_p - m_y_n) / m_y;
 	float f_x, f_y, g_x, g_y;
 	for (int i=0,i2=0; i2<m_y; i2++) {
-		g_y = m_y_0 + s_y*(i2 + 0.5F);
+		g_y = m_y_n + s_y*(i2 + 0.5F);
 		for (int i1=0; i1<m_x; i1++,i++) {
-			g_x = m_x_0 + s_x*(i1 + 0.5F);
+			g_x = m_x_n + s_x*(i1 + 0.5F);
 			fung(g_x, g_y, f_x, f_y, param);
-			float t_x = (f_x - l_x_0) / r_x;
-			float t_y = (f_y - l_y_0) / r_y;
+			float t_x = (f_x - l_x_n) / r_x;
+			float t_y = (f_y - l_y_n) / r_y;
 
 			//assert(t_x >= 0);
 			//assert(t_y >= 0);
@@ -67,13 +67,13 @@ void EyeP_kwmap(
 
 void EyeP_kwmap(
 	FunG fung, void* param,
-	int l_x, int l_y, float l_x_0, float l_x_1, float l_y_0, float l_y_1,
-	int m_x, int m_y, float m_x_0, float m_x_1, float m_y_0, float m_y_1,
+	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
+	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
 	int32_t map_k[], int16_t map_w[][4],
 	int32_t map_n[], int16_t map_z[][4])
 {
-	EyeP_kwmap(fung, param, l_x,   l_y,   l_x_0, l_x_1, l_y_0, l_y_1, m_x,   m_y,   m_x_0, m_x_1, m_y_0, m_y_1, map_k, map_w);
-	EyeP_kwmap(fung, param, l_x/2, l_y/2, l_x_0, l_x_1, l_y_0, l_y_1, m_x/2, m_y/2, m_x_0, m_x_1, m_y_0, m_y_1, map_n, map_z);
+	EyeP_kwmap(fung, param, l_x,   l_y,   l_x_n, l_x_p, l_y_n, l_y_p, m_x,   m_y,   m_x_n, m_x_p, m_y_n, m_y_p, map_k, map_w);
+	EyeP_kwmap(fung, param, l_x/2, l_y/2, l_x_n, l_x_p, l_y_n, l_y_p, m_x/2, m_y/2, m_x_n, m_x_p, m_y_n, m_y_p, map_n, map_z);
 }
 
 void EyeP_remap_w(

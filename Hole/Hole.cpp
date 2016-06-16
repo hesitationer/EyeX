@@ -94,25 +94,19 @@ bool hole_ring(
 bool hole_flatten(
 	uint8_t f[], int l_x, int l_y,
 	int p[], float r[], int count,
-	bool valid[],
 	uint8_t g[], uint8_t h[], uint8_t e[])
 {
 	float sf = 0;
 	float sr = 0;
 	float rf = 0;
 	float rr = 0;
-	int n = 0;
 	for (int k = 0; k < count; k++) {
-		if (valid[k]) {
-			float r_k = r[k];
+		float r_k = r[k];
 		float f_k = f[p[k]];
 		sf += f_k;
 		sr += r_k;
 		rf += r_k*f_k;
 		rr += r_k*r_k;
-
-		n++;
-		}
 	}
 	float af = sf / count;
 	float ar = sr / count;
@@ -124,7 +118,6 @@ bool hole_flatten(
 		h[p_k] = (uint8_t)round(t + r[k]*s);
 		e[p_k] = abs(h[p_k] - f[p_k]);
 		g[p_k] = f[p_k] + 0xA0 - h[p_k];
-		valid[p_k] = e[p_k] < 40;
 	}
 
 	return true;
