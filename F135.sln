@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "F135", "F135\F135.vcxproj", "{2537EAF2-FE75-4E5C-97FC-3B2275786599}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "appF135", "appF135\appF135.vcxproj", "{1F1E1C2C-382B-4EC7-BCAD-144DE7232451}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EyeF", "EyeF\EyeF.vcxproj", "{0DE824D9-A379-404F-8B15-BDFDD6CAA1D0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EyeP", "EyeP\EyeP.vcxproj", "{E69C913D-D18B-4560-AAE7-797E20ED5C50}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EyeX", "EyeX\EyeX.vcxproj", "{FAACAF90-5DC3-4CA4-A804-3044F9238E7A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EyeT", "EyeT\EyeT.vcxproj", "{9D0E8DD8-12EA-4EB8-8EEE-B853FBF1A5A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2537EAF2-FE75-4E5C-97FC-3B2275786599}.Debug|x64.ActiveCfg = Debug|x64
+		{2537EAF2-FE75-4E5C-97FC-3B2275786599}.Debug|x64.Build.0 = Debug|x64
+		{2537EAF2-FE75-4E5C-97FC-3B2275786599}.Release|x64.ActiveCfg = Release|x64
+		{2537EAF2-FE75-4E5C-97FC-3B2275786599}.Release|x64.Build.0 = Release|x64
+		{1F1E1C2C-382B-4EC7-BCAD-144DE7232451}.Debug|x64.ActiveCfg = Debug|x64
+		{1F1E1C2C-382B-4EC7-BCAD-144DE7232451}.Debug|x64.Build.0 = Debug|x64
+		{1F1E1C2C-382B-4EC7-BCAD-144DE7232451}.Release|x64.ActiveCfg = Release|x64
+		{1F1E1C2C-382B-4EC7-BCAD-144DE7232451}.Release|x64.Build.0 = Release|x64
+		{0DE824D9-A379-404F-8B15-BDFDD6CAA1D0}.Debug|x64.ActiveCfg = Debug|x64
+		{0DE824D9-A379-404F-8B15-BDFDD6CAA1D0}.Debug|x64.Build.0 = Debug|x64
+		{0DE824D9-A379-404F-8B15-BDFDD6CAA1D0}.Release|x64.ActiveCfg = Release|x64
+		{0DE824D9-A379-404F-8B15-BDFDD6CAA1D0}.Release|x64.Build.0 = Release|x64
+		{E69C913D-D18B-4560-AAE7-797E20ED5C50}.Debug|x64.ActiveCfg = Debug|x64
+		{E69C913D-D18B-4560-AAE7-797E20ED5C50}.Debug|x64.Build.0 = Debug|x64
+		{E69C913D-D18B-4560-AAE7-797E20ED5C50}.Release|x64.ActiveCfg = Release|x64
+		{E69C913D-D18B-4560-AAE7-797E20ED5C50}.Release|x64.Build.0 = Release|x64
+		{FAACAF90-5DC3-4CA4-A804-3044F9238E7A}.Debug|x64.ActiveCfg = Debug|x64
+		{FAACAF90-5DC3-4CA4-A804-3044F9238E7A}.Debug|x64.Build.0 = Debug|x64
+		{FAACAF90-5DC3-4CA4-A804-3044F9238E7A}.Release|x64.ActiveCfg = Release|x64
+		{FAACAF90-5DC3-4CA4-A804-3044F9238E7A}.Release|x64.Build.0 = Release|x64
+		{9D0E8DD8-12EA-4EB8-8EEE-B853FBF1A5A6}.Debug|x64.ActiveCfg = Debug|x64
+		{9D0E8DD8-12EA-4EB8-8EEE-B853FBF1A5A6}.Debug|x64.Build.0 = Debug|x64
+		{9D0E8DD8-12EA-4EB8-8EEE-B853FBF1A5A6}.Release|x64.ActiveCfg = Release|x64
+		{9D0E8DD8-12EA-4EB8-8EEE-B853FBF1A5A6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
