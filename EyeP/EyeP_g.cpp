@@ -6,6 +6,7 @@
 //
 
 #include "_EyeP.hpp"
+#include "EyeP_g.hpp"
 #include "_opencv2.hpp"
 using namespace cv;
 
@@ -102,14 +103,15 @@ void EyeP_per_pt(const float pt_f[], const float pt_g[], int pt_count, float u[]
 {
 	float (*src)[2] = (float(*)[2])pt_f;
 	float (*dst)[2] = (float(*)[2])pt_g;
-	int l = pt_count * 2;
-	Mat A(l, 8, CV_64F), B(l, 1, CV_64F);
-	Mat X(8, 1, CV_64F);
+	int n = pt_count * 2;
+	double A_[8][8], B_[8], X_[8];
+	Mat A(n, 8, CV_64F, A_), B(n, 1, CV_64F, B_);
+	Mat X(8, 1, CV_64F, X_);
 	double* x = X.ptr<double>();
 	
-	double **a = new double*[l];
-	double **b = new double*[l];
-	for (int k = 0; k<l; k++) {
+	double **a = new double*[n];
+	double **b = new double*[n];
+	for (int k = 0; k<n; k++) {
 		a[k] = A.ptr<double>(k);
 		b[k] = B.ptr<double>(k);
 	}
@@ -121,7 +123,7 @@ void EyeP_per_pt(const float pt_f[], const float pt_g[], int pt_count, float u[]
 	solve(A.t()*A, A.t()*B, X, DECOMP_SVD);
 	
 	for (int j = 0; j<8; j++) {
-		u[j] = x[j];
+		u[j] = (float)x[j];
 	}
 }
 
@@ -148,7 +150,7 @@ void EyeP_per_ln(const float ln_f[], const float ln_g[], int ln_count, float u[]
 	solve(A.t()*A, A.t()*B, X, DECOMP_SVD);
 
 	for (int j = 0; j<8; j++) {
-		u[j] = x[j];
+		u[j] = (float)x[j];
 	}
 }
 
@@ -181,24 +183,8 @@ void EyeP_per_pt_ln(const float pt_f[], const float pt_g[], int pt_count, const 
 	solve(A.t()*A, A.t()*B, X, DECOMP_SVD);
 	
 	for (int j = 0; j<8; j++) {
-		u[j] = x[j];
+		u[j] = (float)x[j];
 		printf("u = %f\n", u[j]);
-	}
-}
-
-void EyeP_g_abbc(float f[], float g[], float u[]) {
-	float a[4 * 4], *ap;
-	Mat A(4, 4, CV_32FC1, a);
-	float f_x, f_y, g_x, g_y;
-	for (int i = 0; i < 4; i += 2) {
-		f_x = f[i];
-		f_y = f[i + 1];
-		g_x = g[i];
-		g_y = g[i + 1];
-		ap = &a[i * 4];
-		ap[0] = f_x; ap[1] = 1; ap[2] = 0; ap[3] = f_x*g_x;
-		ap = &a[(i + 1) * 4];
-		ap[0] = f_y; ap[1] = 0; ap[2] = 1; ap[3] = f_x*g_y;
 	}
 }
 
@@ -215,8 +201,8 @@ void EyeP_pt_ln(Point2f& pt_1, Point2f& pt_2, Point2f& ln)
 	_b[0] = -1.0;
 	_b[1] = -1.0;
 	solve(a, b, x);
-	ln.x = _x[0];
-	ln.y = _x[1];
+	ln.x = (float)_x[0];
+	ln.y = (float)_x[1];
 }
 
 #if 0

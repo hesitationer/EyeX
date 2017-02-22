@@ -10,7 +10,7 @@ namespace f135 {
 	Fisheye fisheye_g;
 	Fisheye fisheye_h[view_count][view_count];
 
-	const int _l = 3840*2160;
+	const int _l = 3840 * 2160;
 	int32_t map_k[_l];
 	int16_t map_w[_l][4];
 

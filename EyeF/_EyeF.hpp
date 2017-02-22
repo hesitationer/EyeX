@@ -177,8 +177,16 @@ void funx_bc(float g_n, float g_p, float h_n, float h_p, void* param)
 inline
 void fung_hg(float h_x, float h_y, float& g_x, float& g_y, void* param)
 {
-#if 0
-	appPerTransform(h_x, h_y, g_x, g_y, param);
+#if 1
+	float* u = (float*)param;
+
+	float x = u[0] * h_x + u[1] * h_y + u[2];
+	float y = u[3] * h_x + u[4] * h_y + u[5];
+	float w = u[6] * h_x + u[7] * h_y + 1;
+
+	g_x = x / w;
+	g_y = y / w;
+	//appPerTransform(h_x, h_y, g_x, g_y, param);
 #else
 	float* bc = (float*)param;
 	float b_x = bc[0];
