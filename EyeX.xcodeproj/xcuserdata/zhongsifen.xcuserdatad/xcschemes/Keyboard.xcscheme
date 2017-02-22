@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C4D67761BD7F9DC0053B2F0"
-               BuildableName = "libEyeJ.a"
-               BlueprintName = "EyeJ"
+               BlueprintIdentifier = "8C2F60C91D9EB1C7006035D2"
+               BuildableName = "Keyboard"
+               BlueprintName = "Keyboard"
                ReferencedContainer = "container:EyeX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8C2F60C91D9EB1C7006035D2"
+            BuildableName = "Keyboard"
+            BlueprintName = "Keyboard"
+            ReferencedContainer = "container:EyeX.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C4D67761BD7F9DC0053B2F0"
-            BuildableName = "libEyeJ.a"
-            BlueprintName = "EyeJ"
+            BlueprintIdentifier = "8C2F60C91D9EB1C7006035D2"
+            BuildableName = "Keyboard"
+            BlueprintName = "Keyboard"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C4D67761BD7F9DC0053B2F0"
-            BuildableName = "libEyeJ.a"
-            BlueprintName = "EyeJ"
+            BlueprintIdentifier = "8C2F60C91D9EB1C7006035D2"
+            BuildableName = "Keyboard"
+            BlueprintName = "Keyboard"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

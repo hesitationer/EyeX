@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CC162CA1BDA896D00D5F737"
-               BuildableName = "libEyeH.a"
-               BlueprintName = "EyeH"
+               BlueprintIdentifier = "8C282A2D1DC62D2D0000D7F6"
+               BuildableName = "libF135.a"
+               BlueprintName = "F135"
                ReferencedContainer = "container:EyeX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8CC162CA1BDA896D00D5F737"
-            BuildableName = "libEyeH.a"
-            BlueprintName = "EyeH"
+            BlueprintIdentifier = "8C282A2D1DC62D2D0000D7F6"
+            BuildableName = "libF135.a"
+            BlueprintName = "F135"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8CC162CA1BDA896D00D5F737"
-            BuildableName = "libEyeH.a"
-            BlueprintName = "EyeH"
+            BlueprintIdentifier = "8C282A2D1DC62D2D0000D7F6"
+            BuildableName = "libF135.a"
+            BlueprintName = "F135"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

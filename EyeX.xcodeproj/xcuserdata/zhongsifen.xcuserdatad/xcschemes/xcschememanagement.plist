@@ -6,62 +6,123 @@
 	<dict>
 		<key>EyeF.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>EyeH.xcscheme</key>
+		<key>EyeM.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>9</integer>
-		</dict>
-		<key>EyeJ.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>12</integer>
 		</dict>
 		<key>EyeP.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 		<key>EyePerspect.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 		<key>EyeT.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>EyeW.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>EyeY.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>F135.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>Keyboard.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>appEyeF.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>appEyeJ.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
-		</dict>
 		<key>appEyeX.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>10</integer>
 		</dict>
 		<key>appEyeY.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>appF135.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
+		<key>fisheye.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>8C08BBC01DB919EC000DD290</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C282A2D1DC62D2D0000D7F6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C282A3E1DC63BF60000D7F6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C2F60C91D9EB1C7006035D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8C4D67761BD7F9DC0053B2F0</key>
 		<dict>
 			<key>primary</key>
@@ -122,7 +183,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8CC8DA591DC6638600C67548</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8CDF1EE91DC459180003F4B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8CE581341B92A9FF0074482E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8CE96F6B1DF5128F005146B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

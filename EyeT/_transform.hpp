@@ -4,6 +4,7 @@
 #define _TRANSFORM_CORE_H_ 1
 
 #include "transform.hpp"
+using namespace cv;
 
 typedef void transform_app_t ( 
 		InputArray src, OutputArray dst,

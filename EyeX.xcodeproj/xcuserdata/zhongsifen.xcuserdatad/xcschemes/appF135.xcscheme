@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C6C78651B8B149F00FA2687"
-               BuildableName = "appEyeF"
-               BlueprintName = "appEyeF"
+               BlueprintIdentifier = "8CC8DA591DC6638600C67548"
+               BuildableName = "appF135"
+               BlueprintName = "appF135"
                ReferencedContainer = "container:EyeX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C6C78651B8B149F00FA2687"
-            BuildableName = "appEyeF"
-            BlueprintName = "appEyeF"
+            BlueprintIdentifier = "8CC8DA591DC6638600C67548"
+            BuildableName = "appF135"
+            BlueprintName = "appF135"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C6C78651B8B149F00FA2687"
-            BuildableName = "appEyeF"
-            BlueprintName = "appEyeF"
+            BlueprintIdentifier = "8CC8DA591DC6638600C67548"
+            BuildableName = "appF135"
+            BlueprintName = "appF135"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C6C78651B8B149F00FA2687"
-            BuildableName = "appEyeF"
-            BlueprintName = "appEyeF"
+            BlueprintIdentifier = "8CC8DA591DC6638600C67548"
+            BuildableName = "appF135"
+            BlueprintName = "appF135"
             ReferencedContainer = "container:EyeX.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -1,6 +1,7 @@
 // transform.cpp
 
 #include "_transform.hpp"
+using namespace cv;
 
 void* transform_new()
 {
@@ -191,22 +192,15 @@ Mat getAffTransform(
     return M;
 }
 
-Mat getPerTransform( 
-		const Point2f pt_src[], const Point2f pt_dst[], int pt_count)
+bool getPerTransform(
+	const Point2f pt_src[], const Point2f pt_dst[],
+	void* p)
 {
-	int l = pt_count*2;
 	Mat M(3, 3, CV_64F), X(8, 1, CV_64F, M.data);
-	Mat A(l, 8, CV_64F), B(l, 1, CV_64F);
+	double a[8][8], b[8][1];
+	Mat A(8, 8, CV_64F, a), B(8, 1, CV_64F, b);
 
-	double **a = new double*[l];
-	double **b = new double*[l];
-	for( int k=0; k<l; k++)
-	{
-		a[k] = A.ptr<double>(k);
-		b[k] = B.ptr<double>(k);
-	}
-
-    for( int i=0,k0=0,k1=1; i<pt_count; i++,k0+=2,k1+=2 )
+    for( int i=0,k0=0,k1=1; i<4; i++,k0+=2,k1+=2 )
     {
         a[k0][0] = a[k1][3] = pt_src[i].x;
         a[k0][1] = a[k1][4] = pt_src[i].y;
@@ -221,10 +215,79 @@ Mat getPerTransform(
         b[k1][0] = pt_dst[i].y;
     }
 
-    solve( A.t()*A, A.t()*B, X, DECOMP_SVD );
-    (( double*)M.data)[8] = 1.;
+    solve( A, B, X, DECOMP_SVD );
 
-    return M;
+	float* m = (float*)p;
+	for (int i = 0; i < 8; i++) {
+		m[i] = (float)((double*)M.data)[i];
+	}
+	m[8] = 1;
+
+    return true;
+}
+
+bool appPerTransform(
+	float f_x, float f_y, float& g_x, float& g_y,
+	void* p)
+{
+	float* m = (float*)p;
+
+	float w = (float)(m[6] * f_x + m[7] * f_y + m[8]);
+	g_x = (float)(m[0] * f_x + m[1] * f_y + m[2]) / w;
+	g_y = (float)(m[3] * f_x + m[4] * f_y + m[5]) / w;
+
+	return true;
+}
+
+bool appPerTransform(float m[9], Point2f f[], Point2f g[], int count)
+{
+	for (int i = 0; i < count; i++) {
+		float f_x = f[i].x;
+		float f_y = f[i].y;
+		float w = (float)(m[6] * f_x + m[7] * f_y + 1);
+		float g_x = (float)(m[0] * f_x + m[1] * f_y + m[2]) / w;
+		float g_y = (float)(m[3] * f_x + m[4] * f_y + m[5]) / w;
+		g[i].x = g_x;
+		g[i].y = g_y;
+	}
+
+	return true;
+}
+
+Mat getPerTransform(
+	const Point2f pt_src[], const Point2f pt_dst[], int pt_count)
+{
+	int l = pt_count * 2;
+	Mat M(3, 3, CV_64F), X(8, 1, CV_64F, M.data);
+	Mat A(l, 8, CV_64F), B(l, 1, CV_64F);
+
+	double **a = new double*[l];
+	double **b = new double*[l];
+	for (int k = 0; k<l; k++)
+	{
+		a[k] = A.ptr<double>(k);
+		b[k] = B.ptr<double>(k);
+	}
+
+	for (int i = 0, k0 = 0, k1 = 1; i<pt_count; i++, k0 += 2, k1 += 2)
+	{
+		a[k0][0] = a[k1][3] = pt_src[i].x;
+		a[k0][1] = a[k1][4] = pt_src[i].y;
+		a[k0][2] = a[k1][5] = 1;
+		a[k0][3] = a[k0][4] = a[k0][5] =
+			a[k1][0] = a[k1][1] = a[k1][2] = 0;
+		a[k0][6] = -pt_src[i].x * pt_dst[i].x;
+		a[k0][7] = -pt_src[i].y * pt_dst[i].x;
+		a[k1][6] = -pt_src[i].x * pt_dst[i].y;
+		a[k1][7] = -pt_src[i].y * pt_dst[i].y;
+		b[k0][0] = pt_dst[i].x;
+		b[k1][0] = pt_dst[i].y;
+	}
+
+	solve(A.t()*A, A.t()*B, X, DECOMP_SVD);
+	((double*)M.data)[8] = 1.;
+
+	return M;
 }
 
 #if 0

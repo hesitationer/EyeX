@@ -14,6 +14,5 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/ml/ml.hpp>
-#include <opencv2/videoio/videoio.hpp>
 
 #endif

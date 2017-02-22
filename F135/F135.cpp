@@ -5,57 +5,74 @@
 #include "EyeP/EyeP.hpp"
 
 namespace f135 {
-	Fov fov_f;
-	Fov fov_g;
-	Fov fov_a;
+	Fisheye fisheye_a;
+	Fisheye fisheye_f;
+	Fisheye fisheye_g;
+	Fisheye fisheye_h[view_count][view_count];
 
-	int32_t map_k[l];
-	int16_t map_w[l][4];
+	const int _l = 3840*2160;
+	int32_t map_k[_l];
+	int16_t map_w[_l][4];
 
-	int32_t map_i_k[l];
-	int16_t map_i_w[l][4];
+	int32_t map_f_k[_l];
+	int16_t map_f_w[_l][4];
 
-	int32_t map_o_k[l];
-	int16_t map_o_w[l][4];
+	int32_t map_g_k[_l];
+	int16_t map_g_w[_l][4];
+
+	int32_t map_a_k[_l];
+	int16_t map_a_w[_l][4];
 }
-//EyeP_kwmap(fung_gf, nullptr, l_x, l_y, l_x_n, l_x_p, l_y_n, l_y_p, n_x, n_y, n_x_n, n_x_p, n_y_n, n_y_p, map_k, map_w);
 
 bool F135_init()
 {
-	fov_init(f135::fov_f, f135::u_x, f135::u_y, F);
-	fov_init(f135::fov_g, f135::v_x, f135::v_y, G);
-
+	fisheye_init(f135::fisheye_a, f135::l_x, f135::l_y, f135::u, A);
+	fisheye_init(f135::fisheye_f, f135::l_x, f135::l_y, f135::u, F);
+	fisheye_init(f135::fisheye_g, f135::m_x, f135::m_y, f135::v, G);
+	for (int i = 0; i < f135::view_count; i++) {
+		for (int j = 0; j < f135::view_count; j++) {
+			fisheye_init(f135::fisheye_h[i][j], f135::n_x, f135::n_y, f135::w, H, f135::view_x[i], f135::view_y[j]);
+		}
+	}
 	return true;
 }
 
-bool F135_fg(cv::Mat& f, cv::Mat& g)
+bool F135_fg(cv::Mat& f, cv::Mat& g, Fisheye& fisheye_f, Fisheye& fisheye_g)
 {
-	EyeF_map_fg(f135::fov_f, f135::fov_g, f.cols, f.rows, g.cols, g.rows, f135::map_k, f135::map_w);
+	EyeF_map_fg(fisheye_f, fisheye_g, f.cols, f.rows, g.cols, g.rows, f135::map_k, f135::map_w);
 	EyeP_remap_w3(f.ptr(), f.cols, f.rows, g.ptr(), g.cols, g.rows, f135::map_k, f135::map_w);
 
 	return true;
 }
 
-bool F135_fa(cv::Mat& f, float o, cv::Mat& g, float p)
+bool F135_fh(cv::Mat& f, cv::Mat& h, Fisheye& fisheye_f, Fisheye& fisheye_h)
 {
-	EyeF_map_fa(f.cols, f.rows, o, 0, g.cols, g.rows, p, 0, f135::map_i_k, f135::map_i_w);
-	EyeP_remap_w3(f.ptr(), f.cols, f.rows, g.ptr(), g.cols, g.rows, f135::map_i_k, f135::map_i_w);
+	EyeF_map_fh(fisheye_f, fisheye_h, f.cols, f.rows, h.cols, h.rows, f135::map_k, f135::map_w);
+	EyeP_remap_w3(f.ptr(), f.cols, f.rows, h.ptr(), h.cols, h.rows, f135::map_k, f135::map_w);
 
 	return true;
 }
 
-bool F135_ag(cv::Mat& f, float o, cv::Mat& g, float p)
+bool F135_fa(cv::Mat& f, cv::Mat& a, Fisheye& fisheye_f, Fisheye& fisheye_a)
 {
-	EyeF_map_ag(f.cols, f.rows, o, 0, g.cols, g.rows, p, 0, f135::map_o_k, f135::map_o_w);
-	EyeP_remap_w3(f.ptr(), f.cols, f.rows, g.ptr(), g.cols, g.rows, f135::map_o_k, f135::map_o_w);
+	EyeF_map_fa(fisheye_f, fisheye_a, f.cols, f.rows, a.cols, a.rows, f135::map_k, f135::map_w);
+	EyeP_remap_w3(f.ptr(), f.cols, f.rows, a.ptr(), a.cols, a.rows, f135::map_k, f135::map_w);
 
 	return true;
 }
 
-bool F135_ah(cv::Mat& f, float o, cv::Mat& g, float q, float w)
+bool F135_ag(cv::Mat& a, cv::Mat& g, Fisheye& fisheye_a, Fisheye& fisheye_g)
 {
-	EyeF_map_ah(f.cols, f.rows, o, 0, g.cols, g.rows, q, w, f135::map_o_k, f135::map_o_w);
-	EyeP_remap_w3(f.ptr(), f.cols, f.rows, g.ptr(), g.cols, g.rows, f135::map_o_k, f135::map_o_w);
+	EyeF_map_ag(fisheye_a, fisheye_g, a.cols, a.rows, g.cols, g.rows, f135::map_k, f135::map_w);
+	EyeP_remap_w3(a.ptr(), a.cols, a.rows, g.ptr(), g.cols, g.rows, f135::map_k, f135::map_w);
+
+	return true;
+}
+
+bool F135_ah(cv::Mat& a, cv::Mat& h, Fisheye& fisheye_a, Fisheye& fisheye_h)
+{
+	EyeF_map_ah(fisheye_a, fisheye_h, a.cols, a.rows, h.cols, h.rows, f135::map_k, f135::map_w);
+	EyeP_remap_w3(a.ptr(), a.cols, a.rows, h.ptr(), h.cols, h.rows, f135::map_k, f135::map_w);
 
 	return true;
 }
