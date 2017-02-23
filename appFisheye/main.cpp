@@ -55,10 +55,6 @@ int main(int argc, const char * argv[])
 	//Fisheye_setup_135(fd, pov_x, pov_y);
 
 	Mat h(Size(fd.display.l_x, fd.display.l_y), f.type());
-	//Fisheye_run(fd, f.data, h.data);
-	//
-	//imshow("Fisheye:h", h);
-	//waitKey();
 
 	int fourcc_mjpg = CV_FOURCC('M', 'J', 'P', 'G');
 	int fourcc_h264 = CV_FOURCC('H', '2', '6', '4');
