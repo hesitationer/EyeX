@@ -1,9 +1,9 @@
-//
-//  _opencv2.cpp
-//  EyeX
-//
-//  Created by SIFEN ZHONG on 1/10/2016.
-//
-//
+// _opencv.cpp
 
 #include "_opencv2.hpp"
+
+#if defined(_DEBUG)
+#pragma comment (lib, "opencv_world320d.lib") 
+#else		
+#pragma comment (lib, "opencv_world320.lib") 
+#endif
