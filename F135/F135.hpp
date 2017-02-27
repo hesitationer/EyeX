@@ -6,8 +6,6 @@
 #include "EyeF/_EyeF.hpp"
 #include "_opencv2.hpp"
 
-const float _dr = PI / 180 / 2;
-
 namespace f135 {
 	const int l_x = 1280;
 	const int l_y =  960;
@@ -18,17 +16,15 @@ namespace f135 {
 	const int m = m_x*m_y;
 
 	const int n_x =  640;
-	const int n_y =  360;
+	const int n_y =  640;
 	const int n = n_x*n_y;
 
-	const float u = _dr * 140;
-	const float v = _dr * 120; // u * l_y/l_x; // _dr * 120;
-	const float w = _dr *  90;
+	const float u = _dr * 135;
+	const float v = _dr * 120;
+	const float w = _dr *  60;
 
-	const int view_count = 9;
-	const int view_zero  = 4;
+	const int view_count = 7;
 	const float view_x[view_count] = {
-		-w/2 * 4,
 		-w/2 * 3,
 		-w/2 * 2,
 		-w/2,
@@ -36,18 +32,15 @@ namespace f135 {
 		+w/2,
 		+w/2 * 2,
 		+w/2 * 3,
-		+w/2 * 4,
 	};
 	const float view_y[view_count] = {
-		-w/2 * 4,
-		-w/2 * 3,
-		-w/2 * 2,
-		-w/2,
+		-w / 2 * 3,
+		-w / 2 * 2,
+		-w / 2,
 		0,
-		+w/2,
-		+w/2 * 2,
-		+w/2 * 3,
-		+w/2 * 4,
+		+w / 2,
+		+w / 2 * 2,
+		+w / 2 * 3,
 	};
 
 	extern Fisheye fisheye_a;
@@ -60,13 +53,13 @@ bool F135_init()
 ;
 bool F135_fg(cv::Mat& f, cv::Mat& g, Fisheye& fisheye_f = f135::fisheye_f, Fisheye& fisheye_g = f135::fisheye_g)
 ;
-bool F135_fh(cv::Mat& f, cv::Mat& h, Fisheye& fisheye_f = f135::fisheye_f, Fisheye& fisheye_h = f135::fisheye_h[f135::view_zero][f135::view_zero])
+bool F135_fh(cv::Mat& f, cv::Mat& h, Fisheye& fisheye_f = f135::fisheye_f, Fisheye& fisheye_h = f135::fisheye_h[3][3])
 ;
 bool F135_fa(cv::Mat& f, cv::Mat& a, Fisheye& fisheye_f = f135::fisheye_f, Fisheye& fisheye_a = f135::fisheye_a)
 ;
 bool F135_ag(cv::Mat& a, cv::Mat& g, Fisheye& fisheye_a = f135::fisheye_a, Fisheye& fisheye_g = f135::fisheye_g)
 ;
-bool F135_ah(cv::Mat& a, cv::Mat& h, Fisheye& fisheye_a = f135::fisheye_a, Fisheye& fisheye_h = f135::fisheye_h[f135::view_zero][f135::view_zero])
+bool F135_ah(cv::Mat& a, cv::Mat& h, Fisheye& fisheye_a = f135::fisheye_a, Fisheye& fisheye_h = f135::fisheye_h[3][3])
 ;
 
 #endif // !_F135_h_

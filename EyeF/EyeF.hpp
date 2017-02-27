@@ -35,6 +35,13 @@ typedef struct {
 }
 Fisheye;
 
+typedef struct {
+	int l_x, l_y;
+	float z_x, z_y;
+	float r_x, r_y;
+}
+ZR;
+
 void fisheye_init(Fisheye& fisheye, int l_x, int l_y, float fov, AGF type, float pov_x = 0, float pov_y = 0)
 ;
 void EyeF_map_fg(Fisheye& fov_f, Fisheye& fov_g,

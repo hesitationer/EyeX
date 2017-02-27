@@ -10,22 +10,18 @@
 #include "EyeF/EyeF.hpp"
 #include "EyeP/EyeP.hpp"
 #include <stdint.h>
-#include <stdio.h>
+#include <string>
 #include <math.h>
 #include <iostream>
 using namespace cv;
 
 int main(int argc, const char * argv[])
 {
-	std::string path("/Users/zhongsifen/Data/fisheye/");
+	std::string path("/Users/zhongsifen/Work/Data/fisheye/");
 	char name[80] = { "chart_135" };
 	char ext[8] = { ".png" };
-	std::string title("fisheye");
-	
+
 	Mat f = imread(path + name + ".png", IMREAD_COLOR);
-//	namedWindow(title, WINDOW_NORMAL);
-//	resizeWindow(title, 640, 480);
-//	imshow(title, f);
 	imshow("F135:f", f);
 	waitKey();
 	

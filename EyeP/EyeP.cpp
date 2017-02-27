@@ -24,7 +24,64 @@ void EyeP_kw(
 	w_3 = _s(p1*p2);
 }
 
+void EyeP_kwmap_zr(
+	FunG fung, void* param,
+	int l_x, int l_y, float z_x, float z_y, float r_x, float r_y,
+	int m_x, int m_y, float w_x, float w_y, float s_x, float s_y,
+	int32_t map_k[], int16_t map_w[][4])
+{
+	float m0_x = -(s_x*m_x / 2);
+	float m0_y = -(s_x*m_y / 2);
+	float f_x, f_y, g_x, g_y;
+	for (int i = 0, i2 = 0; i2<m_y; i2++) {
+		g_y = m0_y + s_y*(i2 + 0.5F);
+		for (int i1 = 0; i1<m_x; i1++, i++) {
+			g_x = m0_x + s_x*(i1 + 0.5F);
+			fung(g_x, g_y, f_x, f_y, param);
+			float t_x = (f_x/r_x) + z_x;
+			float t_y = (f_y/r_y) + z_y;
+
+			//assert(t_x >= 0);
+			//assert(t_y >= 0);
+			//assert(t_x < l_x-1);
+			//assert(t_y < l_y-1);
+
+			if (t_x < 0) t_x = 0;
+			if (t_x > l_x - 2) t_x = (float)l_x - 2;
+			if (t_y < 0) t_y = 0;
+			if (t_y > l_y - 2) t_y = (float)l_y - 2;
+
+			int k_x, k_y;
+			int16_t w_0, w_1, w_2, w_3;
+			EyeP_kw(t_x, t_y, k_x, k_y, w_0, w_1, w_2, w_3);
+			map_k[i] = k_x + k_y*l_x;
+			map_w[i][0] = w_0;
+			map_w[i][1] = w_1;
+			map_w[i][2] = w_2;
+			map_w[i][3] = w_3;
+		}
+	}
+}
+
 void EyeP_kwmap(
+	FunG fung, void* param,
+	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
+	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
+	int32_t map_k[], int16_t map_w[][4])
+{
+	float z_x = ((float)l_x) / 2;
+	float z_y = ((float)l_y) / 2;
+	float r_x = (l_x_p - l_x_n) / ((float)l_x);
+	float r_y = (l_y_p - l_y_n) / ((float)l_y);
+	float w_x = ((float)m_x) / 2;
+	float w_y = ((float)m_y) / 2;
+	float s_x = (m_x_p - m_x_n) / ((float)m_x);
+	float s_y = (m_y_p - m_y_n) / ((float)m_y);
+
+	EyeP_kwmap_zr(fung, param, l_x, l_y, z_x, z_y, r_x, r_y, m_x, m_y, w_x, w_y, s_x, s_y, map_k, map_w);
+}
+
+void EyeP_kwmap_(
 	FunG fung, void* param,
 	int l_x, int l_y, float l_x_n, float l_x_p, float l_y_n, float l_y_p,
 	int m_x, int m_y, float m_x_n, float m_x_p, float m_y_n, float m_y_p,
@@ -35,9 +92,9 @@ void EyeP_kwmap(
 	float s_x = (float)(m_x_p - m_x_n) / m_x;
 	float s_y = (float)(m_y_p - m_y_n) / m_y;
 	float f_x, f_y, g_x, g_y;
-	for (int i=0,i2=0; i2<m_y; i2++) {
+	for (int i = 0, i2 = 0; i2<m_y; i2++) {
 		g_y = m_y_n + s_y*(i2 + 0.5F);
-		for (int i1=0; i1<m_x; i1++,i++) {
+		for (int i1 = 0; i1<m_x; i1++, i++) {
 			g_x = m_x_n + s_x*(i1 + 0.5F);
 			fung(g_x, g_y, f_x, f_y, param);
 			float t_x = (f_x - l_x_n) / r_x;
@@ -47,12 +104,12 @@ void EyeP_kwmap(
 			//assert(t_y >= 0);
 			//assert(t_x < l_x-1);
 			//assert(t_y < l_y-1);
-			
-			if (t_x < 0    ) t_x = 0;
-			if (t_x > l_x-2) t_x = (float)l_x-2;
-			if (t_y < 0    ) t_y = 0;
-			if (t_y > l_y-2) t_y = (float)l_y-2;
-			
+
+			if (t_x < 0) t_x = 0;
+			if (t_x > l_x - 2) t_x = (float)l_x - 2;
+			if (t_y < 0) t_y = 0;
+			if (t_y > l_y - 2) t_y = (float)l_y - 2;
+
 			int k_x, k_y;
 			int16_t w_0, w_1, w_2, w_3;
 			EyeP_kw(t_x, t_y, k_x, k_y, w_0, w_1, w_2, w_3);

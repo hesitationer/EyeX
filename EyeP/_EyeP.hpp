@@ -9,6 +9,6 @@
 #define _EyeX_EyeP_hpp
 
 #include "EyeP.hpp"
-#include "_EyeX.hpp"
+#include "EyeX/_EyeX.hpp"
 
 #endif
