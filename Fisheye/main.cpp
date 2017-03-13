@@ -19,7 +19,7 @@ using namespace cv;
 
 int main(int argc, const char * argv[])
 {
-	std::string path("/Users/zhongsifen/Work/Data/fisheye/");
+	std::string path("/Users/zhongsifen/Data/fisheye/");
 	char name[80] = { "1600x1476" };
 	char ext[8] = { ".jpg" };
 
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[])
 	const int lp_x = 1488 - e;
 	const int ln_y = 56 + e;
 	const int lp_y = 1448 - e;
-	const float fov_c = DR(225);
+	const float fov_c = DR(180);
 
 	const int m_x = 288;
 	const int m_y = 288;
@@ -50,20 +50,22 @@ int main(int argc, const char * argv[])
 
 	FD fd;
 	Fisheye_camera(fd, f.cols, f.rows, roi.tl().x, roi.tl().y, roi.br().x, roi.br().y, fov_c);
-	Fisheye_display(fd, m_x, m_y, fov_d);
-	//Fisheye_setup(fd, pov_x, pov_y);
-	//Fisheye_setup_135(fd, pov_x, pov_y);
-
+	Fisheye_display(fd, m_x, m_y, DR(120));
+	Fisheye_setup(fd, 0, 0);
 	Mat h(Size(fd.display.l_x, fd.display.l_y), f.type());
+	Fisheye_run(fd, f.data, h.data);
+	imshow("Fisheye:h 0", h);	waitKey();
 
 	int fourcc_mjpg = CV_FOURCC('M', 'J', 'P', 'G');
 	int fourcc_h264 = CV_FOURCC('H', '2', '6', '4');
 	VideoWriter wri(path + name + "_p.avi", fourcc_mjpg, 25, h.size());			if (!wri.isOpened()) return -1;
 
+	Fisheye_display(fd, m_x, m_y, fov_d);
+
 	const float t = fov_d * 2;
 	const float u = fov_c - t;
 	const float s = DR(1);
-	const float r = fov_d;
+	const float r = fov_c - fov_d;
 	const float z = fov_d;
 
 	float v = 0;
@@ -107,7 +109,7 @@ int main(int argc, const char * argv[])
 	Fisheye_run(fd, f.data, h.data);
 	imshow("Fisheye:h -r", h);	waitKey();
 
-	return 0;
+//	return 0;
 
 	while (v<+r) {
 		Fisheye_setup(fd, v, 0);

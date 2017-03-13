@@ -9,6 +9,7 @@
 #include "Fisheye.hpp"
 #include "EyeP/EyeP.hpp"
 #include "EyeP/EyeP_g.hpp"
+#include "EyeF/_EyeF.hpp"
 
 #include "F135/F135.hpp"
 
@@ -51,10 +52,15 @@ bool Fisheye_display(FD& fd, int l_x, int l_y, float fov)
 	_fl(fd.display, l_x, l_y, fov, z_x, z_y, r_x, r_y);
 
 	int k = 0;
-	fung_ag(-fov, -fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
-	fung_ag(+fov, -fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
-	fung_ag(+fov, +fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
-	fung_ag(-fov, +fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+//	fung_ag(-fov, -fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+//	fung_ag(+fov, -fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+//	fung_ag(+fov, +fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+//	fung_ag(-fov, +fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+
+	fung_ag(-fov, 0, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+	fung_ag(0, -fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+	fung_ag(+fov, 0, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
+	fung_ag(0, +fov, fd.cnr_o[k], fd.cnr_o[k + 1], nullptr); k += 2;
 
 	int l = l_x*l_y;
 	fd.map_k = new int32_t[l];
@@ -64,6 +70,18 @@ bool Fisheye_display(FD& fd, int l_x, int l_y, float fov)
 }
 
 //void EyeP_per_pt(const float pt_f[], const float pt_g[], int pt_count, float u[])
+void Fisheye_per(float pov_x, float pov_y, float per[8])
+{
+	per[0] = per[4] = 1;
+	per[1] = per[3] = 0;
+	float t_x, t_y;
+	fung_ag(pov_x, pov_y, t_x, t_y, nullptr);
+	per[2] = t_x;
+	per[5] = t_y;
+	per[6] = -t_x;
+	per[7] = -t_y;
+	per[6] = per[7] = 0;
+}
 
 bool Fisheye_setup(FD& fd, float pov_x, float pov_y)
 {
@@ -73,36 +91,19 @@ bool Fisheye_setup(FD& fd, float pov_x, float pov_y)
 	float fov = fd.display.fov;
 
 	int k = 0;
-	fung_ag(pov_x - fov, pov_y - fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
-	fung_ag(pov_x + fov, pov_y - fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
-	fung_ag(pov_x + fov, pov_y + fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
-	fung_ag(pov_x - fov, pov_y + fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+//	fung_ag(pov_x - fov, pov_y - fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+//	fung_ag(pov_x + fov, pov_y - fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+//	fung_ag(pov_x + fov, pov_y + fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+//	fung_ag(pov_x - fov, pov_y + fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
 
-	//float pt_f[8];
-	//k = 0;
-	//float pt_x, pt_y;
-	//fung_ag(pov_x - fov, pov_y - fov, pt_x, pt_y, nullptr);
-	//pt_f[k++] = pt_x; pt_f[k++] = pt_y;
-	//fung_ag(pov_x + fov, pov_y - fov, pt_x, pt_y, nullptr);
-	//pt_f[k++] = pt_x; pt_f[k++] = pt_y;
-	//fung_ag(pov_x + fov, pov_y + fov, pt_x, pt_y, nullptr);
-	//pt_f[k++] = pt_x; pt_f[k++] = pt_y;
-	//fung_ag(pov_x - fov, pov_y + fov, pt_x, pt_y, nullptr);
-	//pt_f[k++] = pt_x; pt_f[k++] = pt_y;
-
-	//float pt_g[8];
-	//k = 0;
-	//fung_ag(0 - fov, 0 - fov, pt_x, pt_y, nullptr);
-	//pt_g[k++] = pt_x; pt_g[k++] = pt_y;
-	//fung_ag(0 + fov, 0 - fov, pt_x, pt_y, nullptr);
-	//pt_g[k++] = pt_x; pt_g[k++] = pt_y;
-	//fung_ag(0 + fov, 0 + fov, pt_x, pt_y, nullptr);
-	//pt_g[k++] = pt_x; pt_g[k++] = pt_y;
-	//fung_ag(0 - fov, 0 + fov, pt_x, pt_y, nullptr);
-	//pt_g[k++] = pt_x; pt_g[k++] = pt_y;
-
+	fung_ag(pov_x - fov, pov_y - 0, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+	fung_ag(pov_x + 0, pov_y - fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+	fung_ag(pov_x + fov, pov_y + 0, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+	fung_ag(pov_x - 0, pov_y + fov, fd.cnr_p[k], fd.cnr_p[k + 1], nullptr); k += 2;
+	
 	float per[8];
-	EyeP_per_pt(fd.cnr_o, fd.cnr_p, 4, per);
+//	EyeP_per_pt(fd.cnr_o, fd.cnr_p, 4, per);
+	Fisheye_per(pov_x, pov_y, per);
 
 	EyeP_kwmap_zr(fung_hf, per, fd.camera.l_x, fd.camera.l_y, fd.camera.z_x, fd.camera.z_y, fd.camera.r_x, fd.camera.r_y, fd.display.l_x, fd.display.l_y, fd.display.z_x, fd.display.z_y, fd.display.r_x, fd.display.r_y, fd.map_k, fd.map_w);
 

@@ -48,13 +48,13 @@ float fun1_ga(float g)
 inline
 float fun1_gf(float g)
 {
-	return (abs(g) < FLT_EPSILON) ? 0 : (-1 + sqrt(1 + g*g)) * 2 / g;
+	return (fabsf(g) < FLT_EPSILON) ? 0 : (-1 + sqrt(1 + g*g)) * 2 / g;
 }
 
 inline
 float fun1_fg(float f)
 {
-	return (abs(f) > (2 - FLT_EPSILON)) ? FLT_MAX : f / (1 - f*f / 4);
+	return (fabsf(f) > (2 - FLT_EPSILON)) ? FLT_MAX : f / (1 - f*f / 4);
 }
 
 inline

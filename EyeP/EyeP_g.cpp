@@ -39,6 +39,8 @@ void EyeP_g(float f_x, float f_y, float& g_x, float& g_y, void* param)
 // f_x + b1 - (f_x*g_x)*c1 - (f_y*g_x)*c2 = g_x
 // f_y + b2 - (f_x*g_y)*c1 - (f_y*g_y)*c2 = g_y
 //
+// 
+//
 // fn_x + b1 - (fn_x*gn_x)*c1 - (fn_y*gn_x)*c2 = gn_x
 // fn_y + b2 - (fn_x*gn_y)*c1 - (fn_y*gn_y)*c2 = gn_y
 // fp_x + b1 - (fp_x*gp_x)*c1 - (fp_y*gp_x)*c2 = gp_x
