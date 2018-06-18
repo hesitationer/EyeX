@@ -70,17 +70,12 @@ bool Fisheye_display(FD& fd, int l_x, int l_y, float fov)
 }
 
 //void EyeP_per_pt(const float pt_f[], const float pt_g[], int pt_count, float u[])
-void Fisheye_per(float pov_x, float pov_y, float per[8])
+void Fisheye_per(float pov_x, float pov_y, float t[2])
 {
-	per[0] = per[4] = 1;
-	per[1] = per[3] = 0;
 	float t_x, t_y;
 	fung_ag(pov_x, pov_y, t_x, t_y, nullptr);
-	per[2] = t_x;
-	per[5] = t_y;
-	per[6] = -t_x;
-	per[7] = -t_y;
-	per[6] = per[7] = 0;
+	t[0] = t_x;
+	t[1] = t_y;
 }
 
 bool Fisheye_setup(FD& fd, float pov_x, float pov_y)

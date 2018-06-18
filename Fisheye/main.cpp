@@ -32,8 +32,8 @@ int main(int argc, const char * argv[])
 	const int lp_y = 1448 - e;
 	const float fov_c = DR(180);
 
-	const int m_x = 288;
-	const int m_y = 288;
+	const int m_x = 640;
+	const int m_y = 640;
 	const float fov_d = fov_c / 3;
 	float pov_x = 0;
 	float pov_y = 0;
@@ -50,7 +50,7 @@ int main(int argc, const char * argv[])
 
 	FD fd;
 	Fisheye_camera(fd, f.cols, f.rows, roi.tl().x, roi.tl().y, roi.br().x, roi.br().y, fov_c);
-	Fisheye_display(fd, m_x, m_y, DR(120));
+	Fisheye_display(fd, m_x, m_y, DR(150));
 	Fisheye_setup(fd, 0, 0);
 	Mat h(Size(fd.display.l_x, fd.display.l_y), f.type());
 	Fisheye_run(fd, f.data, h.data);
@@ -109,7 +109,7 @@ int main(int argc, const char * argv[])
 	Fisheye_run(fd, f.data, h.data);
 	imshow("Fisheye:h -r", h);	waitKey();
 
-//	return 0;
+	return 0;
 
 	while (v<+r) {
 		Fisheye_setup(fd, v, 0);

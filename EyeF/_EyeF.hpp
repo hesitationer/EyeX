@@ -177,6 +177,15 @@ void funx_bc(float g_n, float g_p, float h_n, float h_p, void* param)
 inline
 void fung_hg(float h_x, float h_y, float& g_x, float& g_y, void* param)
 {
+	float* p = (float*)param;
+	float p_x = p[0];
+	float p_y = p[1];
+	float z = 1.0F/(1 - p_x*h_x - p_y*h_y);
+	g_x = (h_x + p_x)*z;
+	g_y = (h_y + p_y)*z;
+	
+	return;
+	
 #if 1
 	float* u = (float*)param;
 
